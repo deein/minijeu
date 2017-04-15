@@ -18,19 +18,22 @@ var config = {
 gulp.task('bower', function() {
     return bower().pipe(gulp.dest(config.bowerDir));
 });
+// Gulp lib
 gulp.task('lib', function() {
     return gulp.src([
         config.bowerDir + '/jquery/dist/jquery.js',
-        config.bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js',
-        config.bowerDir + '/requirejs/require.js'
+        config.bowerDir + '/bootstrap-sass/assets/javascripts/bootstrap.js'
     ]).pipe(uglify()).pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.publicPath + '/js/lib/'));
+    .pipe(gulp.dest(config.devPath + '/js/'));
 });
+// Gulp js
 gulp.task('js', function() {
     return gulp.src([
+        config.devPath + '/js/jquery.js', 
         config.devPath + '/js/**/*.js'
     ])
-    .pipe(concat('main.min.js')).pipe(uglify())
+    .pipe(concat('main.min.js'))
+    .pipe(uglify())
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.publicPath + '/js/'))
     .on("error", notify.onError(function(error) {
@@ -38,6 +41,7 @@ gulp.task('js', function() {
     }))
     .pipe(browserSync.stream());
 });
+// Gulp fonts
 gulp.task('fonts', function() {
     return gulp.src([
         config.bowerDir + '/bootstrap-sass/assets/fonts/bootstrap/*',
@@ -46,9 +50,11 @@ gulp.task('fonts', function() {
         prefix: 7
     }));
 });
+// Gulp watch
 gulp.task('watch', function() {
     gulp.watch(config.devPath + '/js/**/*.js', ['js']);
 });
+// Gulp serve
 gulp.task('serve', ['js'], function() {
     browserSync.init({
         server: config.publicPath
