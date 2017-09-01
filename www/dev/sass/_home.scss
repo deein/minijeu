@@ -1,3 +1,57 @@
+html, body{
+	height: 100%;
+}
 body{
 	background: $body-bg;
+	padding: 20px;
+	font-family: 'Titillium Web', sans-serif;
+}
+
+.wrapper{
+	background: $bg-orange;
+	width: 680px;
+	height: 680px;
+	border:10px solid $border-orange;
+	@include display-flex;
+	@include align-items(center);
+	@include justify-content(center);
+	@include text-shadow(0 1px 1px 5px rgba(#5e3b03, .5));
+	.content{
+		width: 400px;
+		height: auto;
+		background: $bg-modal url('../resources/slice-pattern.png');
+		border: 10px solid $border-orange;
+		@include box-shadow(0 0 20px 0 rgba(#5e3b03, .3));
+		.heading{
+			width: 100%;
+			line-height: 100px;
+			text-align: center;
+			font-weight: bold;
+			color: white;
+			font-size: 40px;
+		}
+		.score{
+			width: 100%;
+			padding:10px 20px;
+			text-align: center;
+			font-size: 16px;
+			background: rgba($bg-orange, .5);
+			text-transform: uppercase;
+			color:white;
+			@include box-shadow(0 1px 1px 0 rgba(#5e3b03, .2), 0 1px 1px 0 rgba(white, .4) inset);
+			sup{
+				font-size: 20px;
+				color: $color-orange-pts;
+			}
+			.numbers{
+				font-size: 50px;
+				font-weight: bold;
+			}
+		}
+		.fields{
+			text-align: center;
+			width: 100%;
+			padding:10px 20px;
+		}
+	}
 }
